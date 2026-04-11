@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nacia Forge — Daily Procurement Briefing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -17,7 +17,7 @@
       --accent-dim: rgba(6,177,136,0.15);
       --surface:    #F7F5F0;
       --white:      #FFFFFF;
-      --border:     rgba(13,27,42,0.10);
+      --border:     rgba(51,48,48,0.12);
       --psib:       #3B1F6B;
       --psib-open:  #0D3D38;
       --bepp:       #4A3000;
@@ -34,7 +34,6 @@
       overflow-x: hidden;
     }
 
-    /* ── HERO ── */
     .hero {
       background: var(--ink);
       position: relative;
@@ -47,410 +46,182 @@
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(200,169,110,0.12) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(59,31,107,0.25) 0%, transparent 60%);
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(6,177,136,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(6,177,136,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
 
-    .hero-inner {
-      max-width: 720px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
+    .hero-inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
 
     .eyebrow {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 3.5px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3.5px;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 20px; display: flex; align-items: center; gap: 10px;
     }
-
     .eyebrow::before {
-      content: '';
-      display: block;
-      width: 28px;
-      height: 1px;
-      background: var(--accent);
-      flex-shrink: 0;
+      content: ''; display: block; width: 28px; height: 1px;
+      background: var(--accent); flex-shrink: 0;
     }
 
     .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(36px, 6vw, 58px);
-      font-weight: 800;
-      color: var(--white);
-      line-height: 1.08;
-      letter-spacing: -.02em;
-      margin-bottom: 24px;
+      font-size: clamp(36px, 6vw, 58px); font-weight: 800;
+      color: var(--white); line-height: 1.08;
+      letter-spacing: -.02em; margin-bottom: 24px;
     }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--accent);
-    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
 
     .hero-sub {
-      font-size: 16px;
-      font-weight: 300;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.75;
-      max-width: 540px;
-      margin-bottom: 40px;
+      font-size: 16px; font-weight: 300;
+      color: rgba(255,255,255,0.65); line-height: 1.75;
+      max-width: 540px; margin-bottom: 40px;
     }
 
-    .hero-stats {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-    }
-
-    .stat {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-    }
-
+    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .stat { display: flex; flex-direction: column; gap: 3px; }
     .stat-num {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
+      font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1;
     }
+    .stat-label { font-size: 11px; color: rgba(255,255,255,0.45); letter-spacing: .5px; }
 
-    .stat-label {
-      font-size: 11px;
-      color: rgba(255,255,255,0.45);
-      letter-spacing: .5px;
-    }
-
-    /* ── SEGMENTS ── */
-    .segments {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 56px 24px 0;
-    }
+    .segments { max-width: 720px; margin: 0 auto; padding: 56px 24px 0; }
 
     .section-label {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--ink-light);
-      margin-bottom: 20px;
+      font-size: 10px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--ink-light); margin-bottom: 20px;
     }
 
-    .segment-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 48px;
-    }
-
-    @media (max-width: 520px) {
-      .segment-grid { grid-template-columns: 1fr; }
-    }
+    .segment-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 48px; }
+    @media (max-width: 520px) { .segment-grid { grid-template-columns: 1fr; } }
 
     .seg-card {
-      border-radius: 8px;
-      padding: 18px 20px;
-      border: 1px solid var(--border);
-      cursor: pointer;
-      transition: all 0.18s ease;
-      position: relative;
+      border-radius: 8px; padding: 18px 20px;
+      border: 1px solid var(--border); cursor: pointer;
+      transition: all 0.18s ease; position: relative;
     }
+    .seg-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(51,48,48,.10); }
 
-    .seg-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(13,27,42,.10); }
+    .seg-card[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.06);  border-color: rgba(59,31,107,0.20); }
+    .seg-card[data-seg="PSIB_OPEN"]     { background: rgba(13,61,56,0.06);   border-color: rgba(13,61,56,0.20); }
+    .seg-card[data-seg="BEPP"]          { background: rgba(74,48,0,0.06);    border-color: rgba(74,48,0,0.20); }
+    .seg-card[data-seg="GENERAL"]       { background: rgba(26,43,74,0.06);   border-color: rgba(26,43,74,0.20); }
 
-    .seg-card[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.06); border-color: rgba(59,31,107,0.20); }
-    .seg-card[data-seg="PSIB_OPEN"]     { background: rgba(13,61,56,0.06);  border-color: rgba(13,61,56,0.20); }
-    .seg-card[data-seg="BEPP"]          { background: rgba(74,48,0,0.06);   border-color: rgba(74,48,0,0.20); }
-    .seg-card[data-seg="GENERAL"]       { background: rgba(26,43,74,0.06);  border-color: rgba(26,43,74,0.20); }
-
-    .seg-card.selected[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.12); border-color: var(--psib); box-shadow: 0 0 0 2px var(--psib); }
+    .seg-card.selected[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.12); border-color: var(--psib);     box-shadow: 0 0 0 2px var(--psib); }
     .seg-card.selected[data-seg="PSIB_OPEN"]     { background: rgba(13,61,56,0.12);  border-color: var(--psib-open); box-shadow: 0 0 0 2px var(--psib-open); }
-    .seg-card.selected[data-seg="BEPP"]          { background: rgba(74,48,0,0.12);   border-color: var(--bepp); box-shadow: 0 0 0 2px var(--bepp); }
-    .seg-card.selected[data-seg="GENERAL"]       { background: rgba(26,43,74,0.12);  border-color: var(--general); box-shadow: 0 0 0 2px var(--general); }
+    .seg-card.selected[data-seg="BEPP"]          { background: rgba(74,48,0,0.12);   border-color: var(--bepp);     box-shadow: 0 0 0 2px var(--bepp); }
+    .seg-card.selected[data-seg="GENERAL"]       { background: rgba(26,43,74,0.12);  border-color: var(--general);  box-shadow: 0 0 0 2px var(--general); }
 
-    .seg-dot {
-      width: 10px; height: 10px; border-radius: 50%;
-      display: inline-block; margin-bottom: 10px;
-    }
+    .seg-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-bottom: 10px; }
     [data-seg="PSIB_SETASIDE"] .seg-dot { background: var(--psib); }
     [data-seg="PSIB_OPEN"]     .seg-dot { background: var(--psib-open); }
     [data-seg="BEPP"]          .seg-dot { background: var(--bepp); }
     [data-seg="GENERAL"]       .seg-dot { background: var(--general); }
 
-    .seg-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
-      line-height: 1.3;
-    }
-
-    .seg-desc {
-      font-size: 11px;
-      color: var(--ink-light);
-      line-height: 1.5;
-    }
+    .seg-title  { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 4px; line-height: 1.3; }
+    .seg-desc   { font-size: 11px; color: var(--ink-light); line-height: 1.5; }
 
     .seg-check {
-      position: absolute;
-      top: 14px; right: 14px;
-      width: 18px; height: 18px;
-      border-radius: 50%;
+      position: absolute; top: 14px; right: 14px;
+      width: 18px; height: 18px; border-radius: 50%;
       border: 2px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      transition: all 0.15s;
-      font-size: 10px;
-      color: transparent;
+      transition: all 0.15s; font-size: 10px; color: transparent;
     }
+    .seg-card.selected .seg-check                { color: var(--white); }
+    [data-seg="PSIB_SETASIDE"].selected .seg-check { background: var(--psib);     border-color: var(--psib); }
+    [data-seg="PSIB_OPEN"].selected     .seg-check { background: var(--psib-open); border-color: var(--psib-open); }
+    [data-seg="BEPP"].selected          .seg-check { background: var(--bepp);     border-color: var(--bepp); }
+    [data-seg="GENERAL"].selected       .seg-check { background: var(--general);  border-color: var(--general); }
 
-    .seg-card.selected .seg-check {
-      border-color: currentColor;
-      color: var(--white);
-      background: var(--ink);
-    }
-    [data-seg="PSIB_SETASIDE"].selected .seg-check { background: var(--psib); }
-    [data-seg="PSIB_OPEN"].selected     .seg-check { background: var(--psib-open); }
-    [data-seg="BEPP"].selected          .seg-check { background: var(--bepp); }
-    [data-seg="GENERAL"].selected       .seg-check { background: var(--general); }
-
-    /* ── FORM ── */
-    .form-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px 80px;
-    }
+    .form-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
 
     .form-card {
-      background: var(--white);
-      border-radius: 12px;
-      border: 1px solid var(--border);
-      padding: 36px;
-      box-shadow: 0 2px 16px rgba(13,27,42,.06);
+      background: var(--white); border-radius: 12px;
+      border: 1px solid var(--border); padding: 36px;
+      box-shadow: 0 2px 16px rgba(51,48,48,.06);
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } .form-card { padding: 24px 20px; } }
 
-    @media (max-width: 520px) {
-      .form-row { grid-template-columns: 1fr; }
-      .form-card { padding: 24px 20px; }
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
+    .field { display: flex; flex-direction: column; gap: 6px; }
     .field.full { grid-column: 1 / -1; }
 
-    label {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      color: var(--ink-mid);
-    }
-
+    label { font-size: 11px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; color: var(--ink-mid); }
     label .req { color: var(--accent); margin-left: 2px; }
 
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      padding: 12px 14px;
-      border: 1.5px solid var(--border);
-      border-radius: 6px;
-      font-family: 'Lato', sans-serif;
-      font-size: 14px;
-      color: var(--ink);
-      background: var(--surface);
-      transition: border-color 0.15s, box-shadow 0.15s;
-      outline: none;
+    input[type="text"], input[type="email"] {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); border-radius: 6px;
+      font-family: 'Lato', sans-serif; font-size: 14px;
+      color: var(--ink); background: var(--surface);
+      transition: border-color 0.15s, box-shadow 0.15s; outline: none;
     }
-
     input:focus {
-      border-color: var(--ink);
-      box-shadow: 0 0 0 3px rgba(13,27,42,0.07);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(6,177,136,0.12);
       background: var(--white);
     }
-
     input.error { border-color: #C62828; }
 
-    .hidden-seg { display: none; }
-
-    .seg-required-note {
-      font-size: 12px;
-      color: #C62828;
-      margin-top: -8px;
-      margin-bottom: 16px;
-      display: none;
-    }
+    .seg-required-note { font-size: 12px; color: #C62828; margin-top: -8px; margin-bottom: 16px; display: none; }
 
     .submit-wrap { margin-top: 24px; }
 
     .btn-submit {
-      width: 100%;
-      padding: 16px 24px;
-      background: var(--ink);
-      color: var(--white);
-      border: none;
-      border-radius: 8px;
-      font-family: 'Lato', sans-serif;
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: .5px;
-      cursor: pointer;
-      transition: all 0.18s;
-      position: relative;
-      overflow: hidden;
+      width: 100%; padding: 16px 24px;
+      background: var(--accent); color: var(--white);
+      border: none; border-radius: 8px;
+      font-family: 'Lato', sans-serif; font-size: 14px;
+      font-weight: 700; letter-spacing: .5px;
+      cursor: pointer; transition: all 0.18s;
     }
-
-    .btn-submit:hover { background: #1A2B4A; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,27,42,.20); }
+    .btn-submit:hover { background: #05997A; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(6,177,136,.30); }
     .btn-submit:active { transform: translateY(0); }
     .btn-submit:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
     .btn-submit .spinner {
-      display: none;
-      width: 18px; height: 18px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: white;
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      margin: 0 auto;
+      display: none; width: 18px; height: 18px;
+      border: 2px solid rgba(255,255,255,0.3); border-top-color: white;
+      border-radius: 50%; animation: spin .7s linear infinite; margin: 0 auto;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .form-note {
-      font-size: 11px;
-      color: var(--ink-light);
-      text-align: center;
-      margin-top: 14px;
-      line-height: 1.6;
-    }
+    .form-note { font-size: 11px; color: var(--ink-light); text-align: center; margin-top: 14px; line-height: 1.6; }
 
-    /* ── SUCCESS / ERROR STATES ── */
-    .result-panel {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
+    .result-panel { display: none; text-align: center; padding: 40px 20px; }
     .result-panel.visible { display: block; }
-
-    .result-icon {
-      font-size: 40px;
-      margin-bottom: 16px;
-    }
-
+    .result-icon { font-size: 40px; margin-bottom: 16px; }
     .result-panel h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 26px;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 12px;
+      font-family: 'Playfair Display', serif; font-size: 26px;
+      font-weight: 700; color: var(--ink); margin-bottom: 12px;
     }
+    .result-panel p { font-size: 14px; color: var(--ink-mid); line-height: 1.7; max-width: 420px; margin: 0 auto; }
 
-    .result-panel p {
-      font-size: 14px;
-      color: var(--ink-mid);
-      line-height: 1.7;
-      max-width: 420px;
-      margin: 0 auto;
-    }
+    .features { max-width: 720px; margin: 0 auto; padding: 0 24px 56px; }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    @media (max-width: 600px) { .features-grid { grid-template-columns: 1fr; } }
 
-    /* ── WHAT YOU GET ── */
-    .features {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 24px 56px;
-    }
+    .feature { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 20px; }
+    .feature-icon { font-size: 20px; margin-bottom: 10px; }
+    .feature-title { font-size: 13px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+    .feature-desc { font-size: 12px; color: var(--ink-light); line-height: 1.6; }
 
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-    }
+    .divider { max-width: 720px; margin: 0 auto 40px; padding: 0 24px; border-top: 1px solid var(--border); }
 
-    @media (max-width: 600px) {
-      .features-grid { grid-template-columns: 1fr; }
-    }
+    footer { background: var(--ink); padding: 24px; text-align: center; }
+    footer p { font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: .3px; }
 
-    .feature {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 20px;
-    }
-
-    .feature-icon {
-      font-size: 20px;
-      margin-bottom: 10px;
-    }
-
-    .feature-title {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-
-    .feature-desc {
-      font-size: 12px;
-      color: var(--ink-light);
-      line-height: 1.6;
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      max-width: 720px;
-      margin: 0 auto 40px;
-      padding: 0 24px;
-      border-top: 1px solid var(--border);
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      background: var(--ink);
-      padding: 24px;
-      text-align: center;
-    }
-
-    footer p {
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
-      letter-spacing: .3px;
-    }
-
-    /* ── FADE IN ── */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .fade-up { animation: fadeUp 0.5s ease both; }
-    .delay-1 { animation-delay: .1s; }
-    .delay-2 { animation-delay: .2s; }
-    .delay-3 { animation-delay: .3s; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up  { animation: fadeUp 0.5s ease both; }
+    .delay-1  { animation-delay: .1s; }
+    .delay-2  { animation-delay: .2s; }
+    .delay-3  { animation-delay: .3s; }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
       <div class="eyebrow fade-up">Nacia Forge Intelligence</div>
@@ -465,104 +236,58 @@
         No noise. No generic lists. Just the opportunities that matter to your firm.
       </p>
       <div class="hero-stats fade-up delay-3">
-        <div class="stat">
-          <span class="stat-num">Daily</span>
-          <span class="stat-label">Live CanadaBuys feed</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">4</span>
-          <span class="stat-label">Equity segments</span>
-        </div>
-        <div class="stat">
-          <span class="stat-num">AI</span>
-          <span class="stat-label">Scored &amp; ranked</span>
-        </div>
+        <div class="stat"><span class="stat-num">Daily</span><span class="stat-label">Live CanadaBuys feed</span></div>
+        <div class="stat"><span class="stat-num">4</span><span class="stat-label">Equity segments</span></div>
+        <div class="stat"><span class="stat-num">AI</span><span class="stat-label">Scored &amp; ranked</span></div>
       </div>
     </div>
   </section>
 
-  <!-- WHAT YOU GET -->
   <div style="padding: 48px 0 0;">
     <div class="features">
       <p class="section-label">What's in every briefing</p>
       <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">🎯</div>
-          <div class="feature-title">AI Fit Score</div>
-          <div class="feature-desc">Every tender scored 0–100% for relevance to your segment and business type.</div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-title">Urgency Alerts</div>
-          <div class="feature-desc">Red URGENT flags on tenders closing within 7 days. Separate alert email within 3.</div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🧠</div>
-          <div class="feature-title">Stress Test</div>
-          <div class="feature-desc">The two most likely reasons a bid fails — and the single most important first action.</div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">📅</div>
-          <div class="feature-title">Days to Close</div>
-          <div class="feature-desc">Colour-coded countdown on every card. Green, amber, red — you know instantly.</div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">✏️</div>
-          <div class="feature-title">Amendment Detection</div>
-          <div class="feature-desc">If a closing date changes on a known tender, it surfaces immediately as AMENDED.</div>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🔗</div>
-          <div class="feature-title">Direct Links</div>
-          <div class="feature-desc">Every card links directly to the full solicitation on CanadaBuys. One click.</div>
-        </div>
+        <div class="feature"><div class="feature-icon">🎯</div><div class="feature-title">AI Fit Score</div><div class="feature-desc">Every tender scored 0–100% for relevance to your segment and business type.</div></div>
+        <div class="feature"><div class="feature-icon">⚡</div><div class="feature-title">Urgency Alerts</div><div class="feature-desc">Red URGENT flags on tenders closing within 7 days. Separate alert email within 3.</div></div>
+        <div class="feature"><div class="feature-icon">🧠</div><div class="feature-title">Stress Test</div><div class="feature-desc">The two most likely reasons a bid fails — and the single most important first action.</div></div>
+        <div class="feature"><div class="feature-icon">📅</div><div class="feature-title">Days to Close</div><div class="feature-desc">Colour-coded countdown on every card. Green, amber, red — you know instantly.</div></div>
+        <div class="feature"><div class="feature-icon">✏️</div><div class="feature-title">Amendment Detection</div><div class="feature-desc">If a closing date changes on a known tender, it surfaces immediately as AMENDED.</div></div>
+        <div class="feature"><div class="feature-icon">🔗</div><div class="feature-title">Direct Links</div><div class="feature-desc">Every card links directly to the full solicitation on CanadaBuys. One click.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- SEGMENT SELECTION -->
   <div style="padding: 48px 0 0;">
     <div class="segments">
       <p class="section-label">Choose your segment</p>
       <div class="segment-grid" id="segmentGrid">
-
         <div class="seg-card" data-seg="PSIB_SETASIDE" onclick="selectSegment(this)">
-          <div class="seg-check">✓</div>
-          <div class="seg-dot"></div>
+          <div class="seg-check">✓</div><div class="seg-dot"></div>
           <div class="seg-title">PSIB Set-Aside</div>
           <div class="seg-desc">Tenders set aside exclusively for IBD-registered Indigenous businesses.</div>
         </div>
-
         <div class="seg-card" data-seg="PSIB_OPEN" onclick="selectSegment(this)">
-          <div class="seg-check">✓</div>
-          <div class="seg-dot"></div>
+          <div class="seg-check">✓</div><div class="seg-dot"></div>
           <div class="seg-title">PSIB Open Competition</div>
           <div class="seg-desc">Open tenders where Indigenous firms have strategic positioning advantage.</div>
         </div>
-
         <div class="seg-card" data-seg="BEPP" onclick="selectSegment(this)">
-          <div class="seg-check">✓</div>
-          <div class="seg-dot"></div>
+          <div class="seg-check">✓</div><div class="seg-dot"></div>
           <div class="seg-title">BEPP — Supplier Diversity</div>
           <div class="seg-desc">Professional services and consulting opportunities for Black-owned businesses.</div>
         </div>
-
         <div class="seg-card" data-seg="GENERAL" onclick="selectSegment(this)">
-          <div class="seg-check">✓</div>
-          <div class="seg-dot"></div>
+          <div class="seg-check">✓</div><div class="seg-dot"></div>
           <div class="seg-title">General — Open Competition</div>
           <div class="seg-desc">All open tenders — no equity program required, broad opportunity set.</div>
         </div>
-
       </div>
       <p class="seg-required-note" id="segNote">Please select a segment above.</p>
     </div>
   </div>
 
-  <!-- FORM -->
   <div class="form-wrap">
     <div class="form-card">
-
       <div id="formContent">
         <div class="form-row">
           <div class="field">
@@ -580,45 +305,27 @@
             <input type="email" id="email" placeholder="you@yourfirm.com" autocomplete="email">
           </div>
         </div>
-
-        <!-- Hidden segment input — set by card selection -->
         <input type="hidden" id="segment" value="">
-
         <div class="submit-wrap">
           <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
             <span id="btnText">Start receiving the briefing →</span>
             <div class="spinner" id="btnSpinner"></div>
           </button>
         </div>
-        <p class="form-note">
-          15-day free access &nbsp;·&nbsp; No credit card required
-          &nbsp;·&nbsp; Unsubscribe anytime
-        </p>
+        <p class="form-note">15-day free access &nbsp;·&nbsp; No credit card required &nbsp;·&nbsp; Unsubscribe anytime</p>
       </div>
 
-      <!-- Success state -->
       <div class="result-panel" id="successPanel">
         <div class="result-icon">✅</div>
         <h2>You're in.</h2>
-        <p>
-          Your first briefing arrives tomorrow morning. Check your inbox for a
-          welcome email with everything you need to know.
-          <br><br>
-          If you have questions before then, reply directly to that email.
-        </p>
+        <p>Your first briefing arrives tomorrow morning. Check your inbox for a welcome email with everything you need to know.<br><br>If you have questions before then, reply directly to that email.</p>
       </div>
 
-      <!-- Error state -->
       <div class="result-panel" id="errorPanel">
         <div class="result-icon">⚠️</div>
         <h2>Something went wrong.</h2>
-        <p id="errorMsg">
-          We couldn't process your registration right now. Please try again in a
-          moment, or email us directly at
-          <a href="mailto:info@naciaforge.com" style="color:#1565C0;">info@naciaforge.com</a>.
-        </p>
+        <p id="errorMsg">We couldn't process your registration right now. Please email <a href="mailto:info@naciaforge.com" style="color:var(--accent);">info@naciaforge.com</a> to subscribe directly.</p>
       </div>
-
     </div>
   </div>
 
@@ -629,92 +336,86 @@
   </footer>
 
 <script>
-  // ── CONFIG — update these two values before deploying ──────────────────────
- const WEB3FORMS_KEY = "14ba00ec-e009-409a-a000-cfd0807b8055";
+  // ── Replace with your Web3Forms access key from web3forms.com ──
+  const WEB3FORMS_KEY = "14ba00ec-e009-409a-a000-cfd0807b8055";
 
-let selectedSegment = "";
+  let selectedSegment = "";
 
-function selectSegment(card) {
-  document.querySelectorAll(".seg-card").forEach(c => c.classList.remove("selected"));
-  card.classList.add("selected");
-  selectedSegment = card.dataset.seg;
-  document.getElementById("segment").value = selectedSegment;
-  document.getElementById("segNote").style.display = "none";
-}
-
-function validateForm() {
-  let valid = true;
-  const name  = document.getElementById("fname");
-  const email = document.getElementById("email");
-  [name, email].forEach(el => el.classList.remove("error"));
-
-  if (!name.value.trim()) {
-    name.classList.add("error");
-    name.focus();
-    valid = false;
+  function selectSegment(card) {
+    document.querySelectorAll(".seg-card").forEach(c => c.classList.remove("selected"));
+    card.classList.add("selected");
+    selectedSegment = card.dataset.seg;
+    document.getElementById("segment").value = selectedSegment;
+    document.getElementById("segNote").style.display = "none";
   }
 
-  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!email.value.trim() || !emailRe.test(email.value.trim())) {
-    email.classList.add("error");
-    if (valid) email.focus();
-    valid = false;
-  }
+  function validateForm() {
+    let valid = true;
+    const name  = document.getElementById("fname");
+    const email = document.getElementById("email");
+    [name, email].forEach(el => el.classList.remove("error"));
 
-  if (!selectedSegment) {
-    document.getElementById("segNote").style.display = "block";
-    document.getElementById("segmentGrid").scrollIntoView({ behavior: "smooth", block: "center" });
-    valid = false;
-  }
+    if (!name.value.trim()) { name.classList.add("error"); name.focus(); valid = false; }
 
-  return valid;
-}
-
-async function handleSubmit() {
-  if (!validateForm()) return;
-
-  const btn     = document.getElementById("submitBtn");
-  const btnText = document.getElementById("btnText");
-  const spinner = document.getElementById("btnSpinner");
-
-  btn.disabled          = true;
-  btnText.style.display = "none";
-  spinner.style.display = "block";
-
-  const formData = {
-    access_key:  WEB3FORMS_KEY,
-    subject:     "New Nacia Forge Subscriber — " + selectedSegment,
-    from_name:   "Nacia Forge Intake",
-    name:        document.getElementById("fname").value.trim(),
-    email:       document.getElementById("email").value.trim().toLowerCase(),
-    organization: document.getElementById("org").value.trim(),
-    segment:     selectedSegment,
-  };
-
-  try {
-    const res = await fetch("https://api.web3forms.com/submit", {
-      method:  "POST",
-      headers: { "Content-Type": "application/json" },
-      body:    JSON.stringify(formData),
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      document.getElementById("formContent").style.display = "none";
-      document.getElementById("successPanel").classList.add("visible");
-    } else {
-      throw new Error(data.message || "Submission failed");
+    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.value.trim() || !emailRe.test(email.value.trim())) {
+      email.classList.add("error"); if (valid) email.focus(); valid = false;
     }
-  } catch (err) {
-    console.error("Intake error:", err);
-    document.getElementById("formContent").style.display  = "none";
-    document.getElementById("errorPanel").classList.add("visible");
-  }
-}
 
-document.addEventListener("keydown", e => {
-  if (e.key === "Enter" && document.activeElement.tagName === "INPUT") {
-    handleSubmit();
+    if (!selectedSegment) {
+      document.getElementById("segNote").style.display = "block";
+      document.getElementById("segmentGrid").scrollIntoView({ behavior: "smooth", block: "center" });
+      valid = false;
+    }
+    return valid;
   }
-});
+
+  async function handleSubmit() {
+    if (!validateForm()) return;
+
+    const btn     = document.getElementById("submitBtn");
+    const btnText = document.getElementById("btnText");
+    const spinner = document.getElementById("btnSpinner");
+
+    btn.disabled          = true;
+    btnText.style.display = "none";
+    spinner.style.display = "block";
+
+    const formData = {
+      access_key:   WEB3FORMS_KEY,
+      subject:      "New Nacia Forge Subscriber — " + selectedSegment,
+      from_name:    "Nacia Forge Intake",
+      name:         document.getElementById("fname").value.trim(),
+      email:        document.getElementById("email").value.trim().toLowerCase(),
+      organization: document.getElementById("org").value.trim(),
+      segment:      selectedSegment,
+    };
+
+    try {
+      const res  = await fetch("https://api.web3forms.com/submit", {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify(formData),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        document.getElementById("formContent").style.display = "none";
+        document.getElementById("successPanel").classList.add("visible");
+      } else {
+        throw new Error(data.message || "Submission failed");
+      }
+    } catch (err) {
+      console.error("Intake error:", err);
+      document.getElementById("formContent").style.display = "none";
+      document.getElementById("errorPanel").classList.add("visible");
+    }
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Enter" && document.activeElement.tagName === "INPUT") handleSubmit();
+  });
+</script>
+
+</body>
+</html>

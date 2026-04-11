@@ -5,16 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nacia Forge — Daily Procurement Briefing</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Lato:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink:        #0D1B2A;
-      --ink-mid:    #37474F;
+      --ink:        #333030;
+      --ink-mid:    #333030;
       --ink-light:  #78909C;
-      --accent:     #C8A96E;
-      --accent-dim: rgba(200,169,110,0.15);
+      --accent:     #06B188;
+      --accent-dim: rgba(6,177,136,0.15);
       --surface:    #F7F5F0;
       --white:      #FFFFFF;
       --border:     rgba(13,27,42,0.10);
@@ -27,7 +27,7 @@
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Lato', sans-serif;
       background: var(--surface);
       color: var(--ink);
       min-height: 100vh;
@@ -274,7 +274,7 @@
       padding: 12px 14px;
       border: 1.5px solid var(--border);
       border-radius: 6px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Lato', sans-serif;
       font-size: 14px;
       color: var(--ink);
       background: var(--surface);
@@ -309,7 +309,7 @@
       color: var(--white);
       border: none;
       border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Lato', sans-serif;
       font-size: 14px;
       font-weight: 600;
       letter-spacing: .5px;
@@ -577,7 +577,7 @@
         <div class="form-row">
           <div class="field full">
             <label for="email">Email Address <span class="req">*</span></label>
-            <input type="email" id="email" placeholder="you@yourfirm.ca" autocomplete="email">
+            <input type="email" id="email" placeholder="you@yourfirm.com" autocomplete="email">
           </div>
         </div>
 
@@ -591,7 +591,7 @@
           </button>
         </div>
         <p class="form-note">
-          30-day free access &nbsp;·&nbsp; No credit card required
+          15-day free access &nbsp;·&nbsp; No credit card required
           &nbsp;·&nbsp; Unsubscribe anytime
         </p>
       </div>
@@ -615,7 +615,7 @@
         <p id="errorMsg">
           We couldn't process your registration right now. Please try again in a
           moment, or email us directly at
-          <a href="mailto:hello@naciaforge.ca" style="color:#1565C0;">hello@naciaforge.ca</a>.
+          <a href="mailto:info@naciaforge.com" style="color:#1565C0;">info@naciaforge.com</a>.
         </p>
       </div>
 
@@ -625,7 +625,7 @@
   <div class="divider"></div>
 
   <footer>
-    <p>© 2026 Nacia Forge &nbsp;·&nbsp; naciaforge.ca &nbsp;·&nbsp; Daily Procurement Intelligence for Canada</p>
+    <p>© 2026 Nacia Forge &nbsp;·&nbsp; naciaforge.com &nbsp;·&nbsp; Daily Procurement Intelligence for Canada</p>
   </footer>
 
 <script>
@@ -726,7 +726,7 @@
     } catch (err) {
       console.error("Intake error:", err);
       document.getElementById("errorMsg").textContent =
-        "We couldn't process your registration right now. Please email hello@naciaforge.ca to subscribe directly.";
+        "We couldn't process your registration right now. Please email info@naciaforge.com to subscribe directly.";
       document.getElementById("formContent").style.display = "none";
       document.getElementById("errorPanel").classList.add("visible");
     }

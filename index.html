@@ -630,115 +630,91 @@
 
 <script>
   // ── CONFIG — update these two values before deploying ──────────────────────
-  const GITHUB_TOKEN  = "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";   // Fine-grained PAT: workflow:write only
-  const REPO_OWNER    = "Nacia-Forge";
-  const REPO_NAME     = "Tender-Alerts";
-  const WORKFLOW_FILE = "subscriber_intake.yml";
-  const BRANCH        = "main";
-  // ───────────────────────────────────────────────────────────────────────────
+ const WEB3FORMS_KEY = "14ba00ec-e009-409a-a000-cfd0807b8055";
 
-  let selectedSegment = "";
+let selectedSegment = "";
 
-  function selectSegment(card) {
-    document.querySelectorAll(".seg-card").forEach(c => c.classList.remove("selected"));
-    card.classList.add("selected");
-    selectedSegment = card.dataset.seg;
-    document.getElementById("segment").value = selectedSegment;
-    document.getElementById("segNote").style.display = "none";
+function selectSegment(card) {
+  document.querySelectorAll(".seg-card").forEach(c => c.classList.remove("selected"));
+  card.classList.add("selected");
+  selectedSegment = card.dataset.seg;
+  document.getElementById("segment").value = selectedSegment;
+  document.getElementById("segNote").style.display = "none";
+}
+
+function validateForm() {
+  let valid = true;
+  const name  = document.getElementById("fname");
+  const email = document.getElementById("email");
+  [name, email].forEach(el => el.classList.remove("error"));
+
+  if (!name.value.trim()) {
+    name.classList.add("error");
+    name.focus();
+    valid = false;
   }
 
-  function validateForm() {
-    let valid = true;
-
-    const name  = document.getElementById("fname");
-    const email = document.getElementById("email");
-
-    // Reset errors
-    [name, email].forEach(el => el.classList.remove("error"));
-
-    if (!name.value.trim()) {
-      name.classList.add("error");
-      name.focus();
-      valid = false;
-    }
-
-    const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email.value.trim() || !emailRe.test(email.value.trim())) {
-      email.classList.add("error");
-      if (valid) email.focus();
-      valid = false;
-    }
-
-    if (!selectedSegment) {
-      document.getElementById("segNote").style.display = "block";
-      document.getElementById("segmentGrid").scrollIntoView({ behavior: "smooth", block: "center" });
-      valid = false;
-    }
-
-    return valid;
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value.trim() || !emailRe.test(email.value.trim())) {
+    email.classList.add("error");
+    if (valid) email.focus();
+    valid = false;
   }
 
-  async function handleSubmit() {
-    if (!validateForm()) return;
+  if (!selectedSegment) {
+    document.getElementById("segNote").style.display = "block";
+    document.getElementById("segmentGrid").scrollIntoView({ behavior: "smooth", block: "center" });
+    valid = false;
+  }
 
-    const btn     = document.getElementById("submitBtn");
-    const btnText = document.getElementById("btnText");
-    const spinner = document.getElementById("btnSpinner");
+  return valid;
+}
 
-    // Loading state
-    btn.disabled      = true;
-    btnText.style.display = "none";
-    spinner.style.display = "block";
+async function handleSubmit() {
+  if (!validateForm()) return;
 
-    const payload = {
-      ref: BRANCH,
-      inputs: {
-        name:         document.getElementById("fname").value.trim(),
-        email:        document.getElementById("email").value.trim().toLowerCase(),
-        organization: document.getElementById("org").value.trim(),
-        segment:      selectedSegment,
-      }
-    };
+  const btn     = document.getElementById("submitBtn");
+  const btnText = document.getElementById("btnText");
+  const spinner = document.getElementById("btnSpinner");
 
-    try {
-      const res = await fetch(
-        `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/${WORKFLOW_FILE}/dispatches`,
-        {
-          method:  "POST",
-          headers: {
-            "Authorization":        `Bearer ${GITHUB_TOKEN}`,
-            "Accept":               "application/vnd.github+json",
-            "Content-Type":         "application/json",
-            "X-GitHub-Api-Version": "2022-11-28",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
+  btn.disabled          = true;
+  btnText.style.display = "none";
+  spinner.style.display = "block";
 
-      if (res.status === 204) {
-        // 204 No Content = success (GitHub dispatches return no body)
-        document.getElementById("formContent").style.display = "none";
-        document.getElementById("successPanel").classList.add("visible");
-      } else {
-        const body = await res.text();
-        throw new Error(`GitHub API returned ${res.status}: ${body}`);
-      }
-    } catch (err) {
-      console.error("Intake error:", err);
-      document.getElementById("errorMsg").textContent =
-        "We couldn't process your registration right now. Please email info@naciaforge.com to subscribe directly.";
+  const formData = {
+    access_key:  WEB3FORMS_KEY,
+    subject:     "New Nacia Forge Subscriber — " + selectedSegment,
+    from_name:   "Nacia Forge Intake",
+    name:        document.getElementById("fname").value.trim(),
+    email:       document.getElementById("email").value.trim().toLowerCase(),
+    organization: document.getElementById("org").value.trim(),
+    segment:     selectedSegment,
+  };
+
+  try {
+    const res = await fetch("https://api.web3forms.com/submit", {
+      method:  "POST",
+      headers: { "Content-Type": "application/json" },
+      body:    JSON.stringify(formData),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
       document.getElementById("formContent").style.display = "none";
-      document.getElementById("errorPanel").classList.add("visible");
+      document.getElementById("successPanel").classList.add("visible");
+    } else {
+      throw new Error(data.message || "Submission failed");
     }
+  } catch (err) {
+    console.error("Intake error:", err);
+    document.getElementById("formContent").style.display  = "none";
+    document.getElementById("errorPanel").classList.add("visible");
   }
+}
 
-  // Allow Enter key to submit
-  document.addEventListener("keydown", e => {
-    if (e.key === "Enter" && document.activeElement.tagName === "INPUT") {
-      handleSubmit();
-    }
-  });
-</script>
-
-</body>
-</html>
+document.addEventListener("keydown", e => {
+  if (e.key === "Enter" && document.activeElement.tagName === "INPUT") {
+    handleSubmit();
+  }
+});

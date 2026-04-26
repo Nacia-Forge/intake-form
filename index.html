@@ -107,10 +107,10 @@
     .seg-card[data-seg="BEPP"]          { background: rgba(74,48,0,0.06);    border-color: rgba(74,48,0,0.20); }
     .seg-card[data-seg="GENERAL"]       { background: rgba(26,43,74,0.06);   border-color: rgba(26,43,74,0.20); }
 
-    .seg-card.selected[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.12); border-color: var(--psib);     box-shadow: 0 0 0 2px var(--psib); }
+    .seg-card.selected[data-seg="PSIB_SETASIDE"] { background: rgba(59,31,107,0.12); border-color: var(--psib);      box-shadow: 0 0 0 2px var(--psib); }
     .seg-card.selected[data-seg="PSIB_OPEN"]     { background: rgba(13,61,56,0.12);  border-color: var(--psib-open); box-shadow: 0 0 0 2px var(--psib-open); }
-    .seg-card.selected[data-seg="BEPP"]          { background: rgba(74,48,0,0.12);   border-color: var(--bepp);     box-shadow: 0 0 0 2px var(--bepp); }
-    .seg-card.selected[data-seg="GENERAL"]       { background: rgba(26,43,74,0.12);  border-color: var(--general);  box-shadow: 0 0 0 2px var(--general); }
+    .seg-card.selected[data-seg="BEPP"]          { background: rgba(74,48,0,0.12);   border-color: var(--bepp);      box-shadow: 0 0 0 2px var(--bepp); }
+    .seg-card.selected[data-seg="GENERAL"]       { background: rgba(26,43,74,0.12);  border-color: var(--general);   box-shadow: 0 0 0 2px var(--general); }
 
     .seg-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-bottom: 10px; }
     [data-seg="PSIB_SETASIDE"] .seg-dot { background: var(--psib); }
@@ -128,11 +128,11 @@
       display: flex; align-items: center; justify-content: center;
       transition: all 0.15s; font-size: 10px; color: transparent;
     }
-    .seg-card.selected .seg-check                { color: var(--white); }
-    [data-seg="PSIB_SETASIDE"].selected .seg-check { background: var(--psib);     border-color: var(--psib); }
+    .seg-card.selected .seg-check                  { color: var(--white); }
+    [data-seg="PSIB_SETASIDE"].selected .seg-check { background: var(--psib);      border-color: var(--psib); }
     [data-seg="PSIB_OPEN"].selected     .seg-check { background: var(--psib-open); border-color: var(--psib-open); }
-    [data-seg="BEPP"].selected          .seg-check { background: var(--bepp);     border-color: var(--bepp); }
-    [data-seg="GENERAL"].selected       .seg-check { background: var(--general);  border-color: var(--general); }
+    [data-seg="BEPP"].selected          .seg-check { background: var(--bepp);      border-color: var(--bepp); }
+    [data-seg="GENERAL"].selected       .seg-check { background: var(--general);   border-color: var(--general); }
 
     .form-wrap { max-width: 720px; margin: 0 auto; padding: 0 24px 80px; }
 
@@ -336,9 +336,6 @@
   </footer>
 
 <script>
-  // ── Replace with your Web3Forms access key from web3forms.com ──
-  const WEB3FORMS_KEY = "14ba00ec-e009-409a-a000-cfd0807b8055";
-
   let selectedSegment = "";
 
   function selectSegment(card) {
@@ -381,47 +378,28 @@
     btnText.style.display = "none";
     spinner.style.display = "block";
 
-    const formData = {
-      access_key:   WEB3FORMS_KEY,
-      subject:      "New Nacia Forge Subscriber — " + selectedSegment,
-      from_name:    "Nacia Forge Intake",
-      name:         document.getElementById("fname").value.trim(),
-      email:        document.getElementById("email").value.trim().toLowerCase(),
-      organization: document.getElementById("org").value.trim(),
-      segment:      selectedSegment,
-    };
-
     try {
       const res = await fetch("https://rfp-compliance-pipeline.onrender.com/webhook/subscriber-intake", {
-  method: "POST",
-  body: new URLSearchParams({
-    name:         document.getElementById("fname").value.trim(),
-    email:        document.getElementById("email").value.trim().toLowerCase(),
-    organization: document.getElementById("org").value.trim(),
-    segment:      selectedSegment,
-  }),
-});
-
-if (res.ok) {
-  document.getElementById("formContent").style.display = "none";
-  document.getElementById("successPanel").classList.add("visible");
-} else {
-  throw new Error(`Server error ${res.status}`);
-}
-        method:  "POST",
-        headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify(formData),
+        method: "POST",
+        body: new URLSearchParams({
+          name:         document.getElementById("fname").value.trim(),
+          email:        document.getElementById("email").value.trim().toLowerCase(),
+          organization: document.getElementById("org").value.trim(),
+          segment:      selectedSegment,
+        }),
       });
-      const data = await res.json();
 
-      if (data.success) {
+      if (res.ok) {
         document.getElementById("formContent").style.display = "none";
         document.getElementById("successPanel").classList.add("visible");
       } else {
-        throw new Error(data.message || "Submission failed");
+        throw new Error(`Server error ${res.status}`);
       }
     } catch (err) {
       console.error("Intake error:", err);
+      btn.disabled          = false;
+      btnText.style.display = "block";
+      spinner.style.display = "none";
       document.getElementById("formContent").style.display = "none";
       document.getElementById("errorPanel").classList.add("visible");
     }

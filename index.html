@@ -379,14 +379,17 @@
     spinner.style.display = "block";
 
     try {
+      const params = [
+        "name="         + encodeURIComponent(document.getElementById("fname").value.trim()),
+        "email="        + encodeURIComponent(document.getElementById("email").value.trim().toLowerCase()),
+        "organization=" + encodeURIComponent(document.getElementById("org").value.trim()),
+        "segment="      + encodeURIComponent(selectedSegment),
+      ].join("&");
+
       const res = await fetch("https://rfp-compliance-pipeline.onrender.com/webhook/subscriber-intake", {
-        method: "POST",
-        body: new URLSearchParams({
-          name:         document.getElementById("fname").value.trim(),
-          email:        document.getElementById("email").value.trim().toLowerCase(),
-          organization: document.getElementById("org").value.trim(),
-          segment:      selectedSegment,
-        }),
+        method:  "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body:    params,
       });
 
       if (res.ok) {

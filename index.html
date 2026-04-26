@@ -392,7 +392,22 @@
     };
 
     try {
-      const res  = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("https://rfp-compliance-pipeline.onrender.com/webhook/subscriber-intake", {
+  method: "POST",
+  body: new URLSearchParams({
+    name:         document.getElementById("fname").value.trim(),
+    email:        document.getElementById("email").value.trim().toLowerCase(),
+    organization: document.getElementById("org").value.trim(),
+    segment:      selectedSegment,
+  }),
+});
+
+if (res.ok) {
+  document.getElementById("formContent").style.display = "none";
+  document.getElementById("successPanel").classList.add("visible");
+} else {
+  throw new Error(`Server error ${res.status}`);
+}
         method:  "POST",
         headers: { "Content-Type": "application/json" },
         body:    JSON.stringify(formData),
